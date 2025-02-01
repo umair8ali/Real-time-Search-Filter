@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void clearSearch() {
     setState(() {
       searchController.clear();
-      filteredItems = items;
+      filterSearch('');
     });
   }
 
@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
               onChanged: filterSearch,
               decoration: InputDecoration(
                 labelText: 'Search...',
-                hintText: 'Search Fruits.',
+                hintText: 'Type to Search Fruits.',
                 border: const OutlineInputBorder(),
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: searchController.text.isNotEmpty
@@ -91,20 +91,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
             // Display Filtered List or "No Results Found" Message
             Expanded(
-              child: filteredItems.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: filteredItems.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(filteredItems[index]),
-                          leading: const Icon(
-                            Icons.food_bank,
-                            color: Colors.blue,
-                          ),
-                        );
-                      },
-                    )
-                  : const Center(
+              child: filteredItems.isEmpty
+                  ? const Center(
                       child: Text(
                         'No Match Found!',
                         style: TextStyle(
@@ -112,7 +100,16 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Colors.grey,
                         ),
                       ),
+                    )
+                  : ListView.builder(
+                      itemCount: filteredItems.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(filteredItems[index]),
+                        );
+                      },
                     ),
+                  
             ),
           ],
         ),
