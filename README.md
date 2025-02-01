@@ -1,6 +1,9 @@
 # search_filter
 
-A new Flutter project.
+Real-time filtering with live updates.
+No Results Found" message if there are no matching items.
+Clear button (X) to reset search instantly.
+Smooth UI & Efficient Performance.
 
 ## Getting Started
 
